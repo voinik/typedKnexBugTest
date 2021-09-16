@@ -15,3 +15,12 @@ The second `console.log` that I get is:
 `organizationDb:  { accessUntilExtended: false }`
 
 Notice how the property name of `accessUntilExtended` is misspelled in the first log. I'm not sure what is happening here...
+
+
+Edit: I've found the culprit. It's not TypedKnex, it's postgres:
+
+> NOTICE:  identifier "paymentProviderCustomerReference.organization.accessUntilExtended" will be truncated to "paymentProviderCustomerReference.organization.accessUntilExtend"
+
+The same thing happens in Knex.
+
+Do you think you want to fix this problem within TypedKnex, or will you leave it up to the devs to be aware of this postgres behavior?
