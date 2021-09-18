@@ -13,12 +13,14 @@ const knex = Knex({
 async function example() {
     const typedKnex = new TypedKnex(knex);
 
-    const subscriptionDb = await typedKnex.query(Subscription)
+    const subscriptionDbQuery = await typedKnex.query(Subscription)
         .innerJoinColumn('paymentProviderCustomerReference')
         .innerJoinColumn('paymentProviderCustomerReference.organization')
         .select('id', 'paymentProviderCustomerReference.organizationId', 'paymentProviderCustomerReference.organization.accessUntilExtended')
-        .where('id', subscription1.id)
-        .getSingle();
+        .where('id', subscription1.id);
+
+    console.log('The query is: ', subscriptionDbQuery.toQuery());
+    const subscriptionDb = await subscriptionDbQuery.getSingle();
 
     console.log(subscriptionDb);
     // Notice how the object contains the following: organization: { accessUntilExtend: false }

@@ -16,6 +16,11 @@ The second `console.log` that I get is:
 
 Notice how the property name of `accessUntilExtended` is misspelled in the first log. I'm not sure what is happening here...
 
+I did the same query using just regular Knex:
+`node test.js`
+Wich results in the same:
+{ 'paymentProviderCustomerReference.organization.accessUntilExtend': false }
+
 
 Edit: I've found the culprit. It's not TypedKnex, it's postgres:
 
