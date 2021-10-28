@@ -1,3 +1,7 @@
+# There are 2 bugs described here, each has its own bug report
+
+## Bug 1: Long query names result in trimming
+
 To get it to work you'll need a postgres database and a .env file containing: `PG_USER`, `PG_PASS` and `PG_DBNAME`.
 
 Then:
@@ -29,3 +33,9 @@ Edit: I've found the culprit. It's not TypedKnex, it's postgres:
 The same thing happens in Knex.
 
 Do you think you want to fix this problem within TypedKnex, or will you leave it up to the devs to be aware of this postgres behavior?
+
+## Bug 2: .singleOrNull results in unexpected typing
+
+Look at the `typingTest.ts` file. If you hover over `fullyWrittenSubscription`, you'll see the `({}) | null` type show up, as expected.  
+However, if you hover over `shortHandSubscription` you'll only see `RemoveObjectsFrom<Subscription>`. No `| null`. 
+Both variables result from a `.getSingleOrNull()` call.
