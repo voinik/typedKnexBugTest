@@ -36,6 +36,8 @@ Do you think you want to fix this problem within TypedKnex, or will you leave it
 
 ## Bug 2: .singleOrNull results in unexpected typing
 
-Look at the `typingTest.ts` file. If you hover over `fullyWrittenSubscription`, you'll see the `({}) | null` type show up, as expected.  
-However, if you hover over `shortHandSubscription` you'll only see `RemoveObjectsFrom<Subscription>`. No `| null`. 
+Look at the `typingTest.ts` file. If you hover over `fullyWrittenSubscription`, you'll see the `({}) | null` type show up, as expected. The TypedKnex chain here contained a `.select()`. 
+
+However, if you hover over `shortHandSubscription` you'll only see `RemoveObjectsFrom<Subscription>`. No `| null`. The TypedKnex chain here did not contain a `.select()`. 
+
 Both variables result from a `.getSingleOrNull()` call.
